@@ -5,10 +5,25 @@
  */
 package pruebaprograii_joseosejo;
 
+import java.io.RandomAccessFile;
+
 /**
  *
  * @author jcoq2
  */
-public class ITunes {
+public class ITunes 
+{
+
+    //atributos de randomaccessfile para los archivos
+RandomAccessFile archivoSong;
+RandomAccessFile archivoCodigo;
+RandomAccessFile archivoDownloads;
+
+
+
+
+
+
+
     
 }
