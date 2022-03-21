@@ -9,13 +9,6 @@ package pruebaprograii_joseosejo;
  *
  * @author jcoq2
  */
-public class PruebaPrograII_JoseOsejo {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class ITunes {
     
 }
