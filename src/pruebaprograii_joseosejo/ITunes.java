@@ -22,7 +22,7 @@ public class ITunes {
     //atributos de randomaccessfile para los archivos
     RandomAccessFile archivoSong;
     RandomAccessFile archivoCodigo;
-    RandomAccessFile archivoDownloads;
+    RandomAccessFile archivoDownload;
 
     public ITunes() {
         try {
@@ -31,7 +31,7 @@ public class ITunes {
 
             archivoSong = new RandomAccessFile("archivosItunes/songs.itn", "rw");
             archivoCodigo = new RandomAccessFile("archivosItunes/codigos.itn", "rw");
-            archivoDownloads = new RandomAccessFile("archivosItunes/downloads/itn", "rw");
+            archivoDownload = new RandomAccessFile("archivosItunes/downloads/itn", "rw");
 
             setCodes();
         } catch (IOException e) {
@@ -102,7 +102,29 @@ public class ITunes {
     }
 
     public void downloadSong(int codigoSong, String cliente) throws IOException {
-
+         archivoSong.seek(0);
+        while (archivoSong.getFilePointer() < archivoSong.length()) {
+            int codigo = archivoSong.readInt();
+            String cancion = archivoSong.readUTF();
+            archivoSong.readUTF();
+            double price = archivoSong.readDouble();
+            if (codigo == codigoSong) {
+                archivoSong.skipBytes(8);
+                long pos = archivoSong.getFilePointer();
+                int down = archivoSong.readInt();
+                archivoSong.seek(pos);
+                archivoSong.writeInt(down+1);
+                
+                archivoDownload.seek(archivoDownload.length());
+                archivoDownload.write(getCodigo(4));
+                archivoDownload.writeLong(Calendar.getInstance().getTimeInMillis());
+                archivoDownload.writeInt(codigo);
+                archivoDownload.writeUTF(cliente);
+                archivoDownload.writeDouble(price);
+                
+                System.out.println("Gracias "+cliente+" por bajar "+cancion+" a un costo de Lps. "+price);
+            }
+        }
     }
 
     public void songs(String txtFile) throws IOException {

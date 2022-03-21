@@ -36,7 +36,11 @@ public class MainItunes {
                 int reviewEstrellas = sc.nextInt();
                 itune.reviewSong(codigoCancion, reviewEstrellas);
             } else if (opcion == 3) {
-
+                 System.out.println("Ingrese el codigo de la cancion: ");
+                    int codi = sc.nextInt();
+                    System.out.println("Nombre del cliente: ");
+                    String cliente = sc.next();
+                    itune.downloadSong(codi, cliente);
             } else if (opcion == 4) {
                 System.out.println("Direccion para el reporte: ");
                 String direccion = sc.next();
